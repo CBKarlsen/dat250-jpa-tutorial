@@ -21,7 +21,12 @@ public class Family {
     private final List<Person> members = new ArrayList<>();
 
     // getters and setters
-
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public List<Person> getMembers() {
+        return members;
+    }
 
     public Long getId() {
         return id;
@@ -33,13 +38,5 @@ public class Family {
 
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public List<Person> getMembers() {
-        return members;
     }
 }

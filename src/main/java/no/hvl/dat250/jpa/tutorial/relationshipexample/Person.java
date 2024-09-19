@@ -10,14 +10,15 @@ import jakarta.persistence.Transient;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 @Entity
 public class Person {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String firstName;
+
     private String lastName;
 
     @ManyToOne
@@ -29,8 +30,17 @@ public class Person {
     @OneToMany
     private List<Job> jobList = new ArrayList<>();
 
-    // getters and setters
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setFamily(Family family) {
+        this.family = family;
+    }
 
     public Long getId() {
         return id;
@@ -44,24 +54,12 @@ public class Person {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public Family getFamily() {
         return family;
-    }
-
-    public void setFamily(Family family) {
-        this.family = family;
     }
 
     public String getNonsenseField() {

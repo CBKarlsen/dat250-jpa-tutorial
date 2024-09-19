@@ -41,4 +41,6 @@ public class Job {
     public void setJobDescr(String jobDescr) {
         this.jobDescr = jobDescr;
     }
+
+
 }
