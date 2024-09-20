@@ -102,8 +102,6 @@ public class JpaTest {
             Person user = (Person) q.getSingleResult();
             em.remove(user);
             em.getTransaction().commit();
-            Person person = (Person) q.getSingleResult();
-
             em.close();
         });
     }
