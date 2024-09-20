@@ -24,9 +24,9 @@ public class Todo {
     @Override
     public String toString() {
         return "Todo{" +
-            "id=" + id +
-            ", summary='" + summary + '\'' +
-            ", description='" + description + '\'' +
-            '}';
+                "id=" + id +
+                ", summary='" + summary + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

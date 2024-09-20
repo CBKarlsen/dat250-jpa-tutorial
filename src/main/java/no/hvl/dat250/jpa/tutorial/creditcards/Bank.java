@@ -34,7 +34,7 @@ public class Bank {
 
     public void addOwnedCard(CreditCard card) {
         creditCards.add(card);
-        card.setOwningBank(this);
+        card.setBank(this);
     }
 
 }

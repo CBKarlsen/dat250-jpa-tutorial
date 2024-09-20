@@ -3,12 +3,7 @@ package no.hvl.dat250.jpa.tutorial.creditcards.driver;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import no.hvl.dat250.jpa.tutorial.creditcards.Address;
-import no.hvl.dat250.jpa.tutorial.creditcards.Bank;
-import no.hvl.dat250.jpa.tutorial.creditcards.CreditCard;
-import no.hvl.dat250.jpa.tutorial.creditcards.Customer;
-import no.hvl.dat250.jpa.tutorial.creditcards.Pincode;
-
+import no.hvl.dat250.jpa.tutorial.creditcards.*;
 
 public class CreditCardsMain {
 
@@ -16,60 +11,55 @@ public class CreditCardsMain {
 
   public static void main(String[] args) {
     try (EntityManagerFactory factory = Persistence.createEntityManagerFactory(
-        PERSISTENCE_UNIT_NAME); EntityManager em = factory.createEntityManager()) {
+            PERSISTENCE_UNIT_NAME); EntityManager em = factory.createEntityManager()) {
       em.getTransaction().begin();
       createObjects(em);
       em.getTransaction().commit();
+      em.clear();
     }
 
   }
 
   private static void createObjects(EntityManager em) {
 
-    //Lager bank
+    Customer customer = new Customer();
+    customer.setName("Max Mustermann");
+
+    Address address = new Address();
+    address.setStreet("Inndalsveien");
+    address.setNumber(28);
+
     Bank bank = new Bank();
     bank.setName("Pengebank");
 
-    //Setter pincode
     Pincode pincode = new Pincode();
     pincode.setCode("123");
     pincode.setCount(1);
 
-    //Lager kredittkort1
-    CreditCard card1 = new CreditCard();
-    card1.setNumber(12345);
-    card1.setBalance(-5000);
-    card1.setCreditLimit(-10000);
-    card1.setOwningBank(bank);
-    card1.setPincode(pincode);
+    CreditCard creditCard1 = new CreditCard();
+    creditCard1.setPincode(pincode);
+    creditCard1.setNumber(12345);
+    creditCard1.setBalance(-5000);
+    creditCard1.setCreditLimit(-10000);
+    creditCard1.setBank(bank);
 
-    //lager kredittkort2
-    CreditCard card2 = new CreditCard();
-    card2.setNumber(123);
-    card2.setBalance(1);
-    card2.setCreditLimit(2000);
-    card2.setOwningBank(bank);
-    card2.setPincode(pincode);
+    CreditCard creditCard2 = new CreditCard();
+    creditCard2.setPincode(pincode);
+    creditCard2.setNumber(123);
+    creditCard2.setBalance(1);
+    creditCard2.setCreditLimit(2000);
+    creditCard2.setBank(bank);
 
+    address.addOwner(customer);
 
-    //Kunde max blir laget
-    Customer max = new Customer();
-    max.setName("Max Mustermann");
-    max.addCreditCard(card1);
-    max.addCreditCard(card2);
+    customer.addCreditCard(creditCard1);
+    customer.addCreditCard(creditCard2);
 
-    //Adresse til max
-    Address address = new Address();
-    address.setStreet("Inndalsveien");
-    address.setNumber(28);
-    address.addOwner(max);
-
-    //Lagrer objektene
+    em.persist(customer);
     em.persist(bank);
     em.persist(pincode);
-    em.persist(card1);
-    em.persist(card2);
-    em.persist(max);
+    em.persist(creditCard1);
+    em.persist(creditCard2);
     em.persist(address);
 
   }

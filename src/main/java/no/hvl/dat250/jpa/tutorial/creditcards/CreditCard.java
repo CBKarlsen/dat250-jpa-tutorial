@@ -44,7 +44,7 @@ public class CreditCard {
         return bank;
     }
 
-    public void setOwningBank(Bank bank) {
+    public void setBank(Bank bank) {
         this.bank = bank;
         bank.getOwnedCards().add(this);
     }
